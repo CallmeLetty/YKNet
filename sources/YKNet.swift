@@ -7,7 +7,7 @@
 //
 
 /**
-YKNet owns only one URLSessionManager and one ArSessionDelegate which is weak and implements URLSession, because the session will strong own its URLSessionManager.
+YKNet owns only one URLSessionManager and one YKNetSessionDelegator which is weak and implements URLSession, because the session will strong own its URLSessionManager.
  */
 
 import Foundation
@@ -45,7 +45,7 @@ open class YKNet: NSObject, YKNetRequestAPIsProtocol {
         self.delegate = delegate
         self.logTube = logTube
         
-        let sessionDelegate = ArSessionDelegator()
+        let sessionDelegate = YKNetSessionDelegator()
         let sessionConfig = URLSessionConfiguration.default
         sessionConfig.httpAdditionalHeaders = YKNet.defaultHTTPHeaders
         self.session = URLSession(configuration: URLSessionConfiguration.default,

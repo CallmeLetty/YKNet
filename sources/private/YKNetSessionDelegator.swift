@@ -1,5 +1,5 @@
 //
-//  ArSessionDelegate.swift
+//  YKNetSessionDelegator.swift
 //  Pods
 //
 //  Created by LYY on 2021/11/9.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-/// ArSessionDelegator is weakly owned by YKNet,which receives message from session tasks.
-@objc class ArSessionDelegator: NSObject,
+/// YKNetSessionDelegator is weakly owned by YKNet,which receives message from session tasks.
+@objc class YKNetSessionDelegator: NSObject,
                                 URLSessionTaskDelegate,
                                 URLSessionDataDelegate,
                                 URLSessionDownloadDelegate,
