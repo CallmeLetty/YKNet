@@ -2,8 +2,8 @@
 //  YKNet.swift
 //  YKNet
 //
-//  Created by CavanSu on 2019/6/23.
-//  Copyright © 2019 CavanSu. All rights reserved.
+//  Created by CallmeLetty on 2019/6/23.
+//  Copyright © 2019 CallmeLetty. All rights reserved.
 //
 
 /**
@@ -75,7 +75,7 @@ open class YKNet: NSObject, YKNetRequestAPIsProtocol {
         case .json(let arDicEXCompletion):
             guard let _data = data,
                   let json = try? _data.json() else {
-                      break
+                break
             }
             
             self.log(info: "request success",
@@ -293,19 +293,19 @@ private extension YKNet {
             requestFail?(YKNetError(type: .valueNil("request")))
             return
         }
-
+        
         let startTime = Date.timeIntervalSinceReferenceDate
         let dataTask = session.dataTask(with: request) {[weak self] (data, response, error) in
             guard let `self` = self else {
                 return
             }
-
+            
             // handle error
             if let err = error {
                 let YKNetError = YKNetError.fail(err.localizedDescription,
-                                           code: -1,
-                                           extra: nil,
-                                           responseData: data)
+                                                 code: -1,
+                                                 extra: nil,
+                                                 responseData: data)
                 self.request(error: YKNetError,
                              of: task.event,
                              with: urlStr)
@@ -315,11 +315,11 @@ private extension YKNet {
             
             // handle success
             self.handleHttpSuccess(data: data,
-                                    startTime: startTime,
-                                    from: task,
-                                    success: success)
+                                   startTime: startTime,
+                                   from: task,
+                                   success: success)
         }
-
+        
         dataTask.resume()
     }
     
@@ -328,8 +328,8 @@ private extension YKNet {
                        success: YKNetResponse?,
                        requestFail: YKNetErrorCompletion) {
         guard let urlStr = task.requestType.url else {
-                  requestFail?(YKNetError(type: .valueNil("url")))
-                  return
+            requestFail?(YKNetError(type: .valueNil("url")))
+            return
         }
         
         let startTime = Date.timeIntervalSinceReferenceDate
@@ -354,13 +354,13 @@ private extension YKNet {
             guard let `self` = self else {
                 return
             }
-
+            
             // handle error
             if let err = error {
                 let YKNetError = YKNetError.fail(err.localizedDescription,
-                                           code: -1,
-                                           extra: nil,
-                                           responseData: data)
+                                                 code: -1,
+                                                 extra: nil,
+                                                 responseData: data)
                 self.request(error: YKNetError,
                              of: task.event,
                              with: urlStr)
@@ -377,7 +377,7 @@ private extension YKNet {
             }
             
         }
-
+        
         uploadTask.resume()
     }
     
@@ -391,9 +391,9 @@ private extension YKNet {
               let url = requestMaker.makeUrl(urlstr: urlStr,
                                              httpMethod: method,
                                              parameters: task.parameters) else {
-                  let YKNetError = YKNetError(type: .valueNil("url"))
-                  requestFail?(YKNetError)
-                  return
+            let YKNetError = YKNetError(type: .valueNil("url"))
+            requestFail?(YKNetError)
+            return
         }
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.stringValue
@@ -417,7 +417,7 @@ private extension YKNet {
             requestFail?(error as! YKNetError)
             return
         }
-
+        
         downloadTask.resume()
     }
     
@@ -433,13 +433,13 @@ private extension YKNet {
             throw YKNetError(type: .taskExists(task.id))
         }
         taskHandlers[sessionTask.taskIdentifier] = YKNetTaskHandler(task: task,
-                                                                 sessionTask: sessionTask,
-                                                                 urlStr: urlStr,
-                                                                 responseQueue: responseQueue,
-                                                                 startTime: startTime,
-                                                                 progress: progress,
-                                                                 success: success,
-                                                                 requestFail: requestFail)
+                                                                    sessionTask: sessionTask,
+                                                                    urlStr: urlStr,
+                                                                    responseQueue: responseQueue,
+                                                                    startTime: startTime,
+                                                                    progress: progress,
+                                                                    success: success,
+                                                                    requestFail: requestFail)
     }
     
     func removeTask(url: String) {
@@ -449,7 +449,7 @@ private extension YKNet {
             }
         }
     }
-
+    
     func worker(of event: YKNetRequestEvent) -> YKNetAfterWorker {
         var work: YKNetAfterWorker
         if let tWork = self.afterWorkers[event.name] {
@@ -471,23 +471,23 @@ private extension YKNet {
                          requestFail: YKNetErrorCompletion) -> YKNetError? {
         if let err = error {
             let YKNetError = YKNetError.fail(err.localizedDescription,
-                                       code: -1,
-                                       extra: nil,
-                                       responseData: data)
+                                             code: -1,
+                                             extra: nil,
+                                             responseData: data)
             self.request(error: YKNetError,
                          of: event,
                          with: requestUrl)
             requestFail?(YKNetError)
             return YKNetError
         }
-//        else if let _data = data,
-//           let YKNetError = _data.toYKNetError() {
-//            self.request(error: YKNetError,
-//                         of: event,
-//                         with: requestUrl)
-//            requestFail?(YKNetError)
-//            return YKNetError
-//        }
+        //        else if let _data = data,
+        //           let YKNetError = _data.toYKNetError() {
+        //            self.request(error: YKNetError,
+        //                         of: event,
+        //                         with: requestUrl)
+        //            requestFail?(YKNetError)
+        //            return YKNetError
+        //        }
         return nil
     }
 }

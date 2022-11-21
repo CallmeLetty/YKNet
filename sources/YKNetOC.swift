@@ -2,8 +2,8 @@
 //  YKNet_OC.swift
 //  YKNet
 //
-//  Created by CavanSu on 2020/8/18.
-//  Copyright © 2020 CavanSu. All rights reserved.
+//  Created by CallmeLetty on 2020/8/18.
+//  Copyright © 2020 CallmeLetty. All rights reserved.
 //
 
 @objc public protocol YKNetDelegateOC: NSObjectProtocol {
@@ -219,8 +219,8 @@ fileprivate extension YKNetRequestType {
         switch item.type {
         case .http:
             if let http = item as? YKNetRequestTypeJsonObjectOC {
-                return YKNetRequestType.http(YKNetHTTPMethod.oc(http.method),
-                                          url: http.url)
+                return YKNetRequestType.http(method: YKNetHTTPMethod.oc(http.method),
+                                             url: http.url)
             } else {
                 fatalError("YKNetRequestType error")
             }

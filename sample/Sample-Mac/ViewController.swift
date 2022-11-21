@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  Sample-Mac
 //
-//  Created by CavanSu on 2020/5/29.
-//  Copyright © 2020 CavanSu. All rights reserved.
+//  Created by CallmeLetty on 2020/5/29.
+//  Copyright © 2020 CallmeLetty. All rights reserved.
 //
 
 import Cocoa

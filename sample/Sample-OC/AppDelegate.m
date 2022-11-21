@@ -2,8 +2,8 @@
 //  AppDelegate.m
 //  Sample-OC
 //
-//  Created by CavanSu on 2020/8/18.
-//  Copyright © 2020 CavanSu. All rights reserved.
+//  Created by CallmeLetty on 2020/8/18.
+//  Copyright © 2020 CallmeLetty. All rights reserved.
 //
 
 #import "AppDelegate.h"

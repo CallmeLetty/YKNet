@@ -4,7 +4,7 @@ Pod::Spec.new do |spec|
   spec.summary      = "YKNet is a http/https request service based on URLSession."
   spec.homepage     = "https://github.com/CallmeLetty/YKNet"
   spec.license      = "MIT"
-  spec.author             = { "CavanSu" => "403029552@qq.com", "Letty" => "1085798092@qq.com" }
+  spec.author             = { "CallmeLetty" => "1085798092@qq.com" }
   spec.ios.deployment_target = "10.0"
   spec.osx.deployment_target = "10.10"
   spec.source       = { :git => "https://github.com/CallmeLetty/YKNet.git", :tag => "#{spec.version}" }

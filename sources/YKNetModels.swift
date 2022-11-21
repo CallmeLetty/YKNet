@@ -2,8 +2,8 @@
 //  YKNetModels.swift
 //  YKNetModels
 //
-//  Created by CavanSu on 2019/7/11.
-//  Copyright © 2019 CavanSu. All rights reserved.
+//  Created by CallmeLetty on 2019/7/11.
+//  Copyright © 2019 CallmeLetty. All rights reserved.
 //
 
 import Foundation
@@ -66,7 +66,9 @@ public enum YKNetSwitch: Int, CustomStringConvertible {
 }
 
 public enum YKNetRequestType {
-    case http(YKNetHTTPMethod, url: String), socket(peer: String)
+    case http(method: YKNetHTTPMethod,
+              url: String)
+    case socket(peer: String)
     
     var httpMethod: YKNetHTTPMethod? {
         switch self {
@@ -230,7 +232,8 @@ public struct YKNetUploadTask: YKNetUploadTaskProtocol, CustomStringConvertible 
         TaskId.value += 1
         self.id = TaskId.value
         self.object = object
-        self.requestType = .http(.post, url: url)
+        self.requestType = .http(method: .post,
+                                 url: url)
         self.event = event
         self.timeout = timeout
         self.header = header
@@ -272,7 +275,8 @@ public struct YKNetDownloadTask: YKNetDownloadTaskProtocol, CustomStringConverti
         TaskId.value += 1
         self.id = TaskId.value
         self.object = object
-        self.requestType = .http(.download, url: url)
+        self.requestType = .http(method: .download,
+                                 url: url)
         self.event = event
         self.timeout = timeout
         self.header = header
@@ -429,7 +433,7 @@ fileprivate struct TaskId {
         self.id = TaskId.value
         self.url = url
         self.object = object
-        self.requestType = .http(.post,
+        self.requestType = .http(method: .post,
                                  url: url)
         self.event = event
         
@@ -471,7 +475,7 @@ fileprivate struct TaskId {
         self.id = TaskId.value
         self.url = url
         self.object = object
-        self.requestType = .http(.post,
+        self.requestType = .http(method: .post,
                                  url: url)
         self.event = event
         

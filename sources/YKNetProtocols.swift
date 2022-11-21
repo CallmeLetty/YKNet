@@ -2,8 +2,8 @@
 //  YKNetProtocols.swift
 //  YKNetProtocols
 //
-//  Created by CavanSu on 2019/6/19.
-//  Copyright © 2019 CavanSu. All rights reserved.
+//  Created by CallmeLetty on 2019/6/19.
+//  Copyright © 2019 CallmeLetty. All rights reserved.
 //
 
 import Foundation
