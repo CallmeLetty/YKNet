@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ArTaskHandler {
+struct YKNetTaskHandler {
     var task: YKNetRequestTaskProtocol
     var sessionTask: URLSessionTask
     var urlStr: String

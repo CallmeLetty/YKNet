@@ -32,10 +32,10 @@ open class YKNet: NSObject, YKNetRequestAPIsProtocol {
     private let requestMaker = YKNetRequestMaker()
     
     // String: YKNetRequestEvent name
-    private lazy var afterWorkers = [String: AfterWorker]()
+    private lazy var afterWorkers = [String: YKNetAfterWorker]()
     
     // Key为URLSessionTask的taskIdentifier，以便于在URLSessionDelegate中取值，目前只处理download tasks
-    private(set) lazy var taskHandlers = [Int: ArTaskHandler]()
+    private(set) lazy var taskHandlers = [Int: YKNetTaskHandler]()
     
     private var responseQueue = DispatchQueue(label: "com.ykNet.response.thread")
     private var afterQueue = DispatchQueue(label: "com.ykNet.after.thread")
@@ -432,7 +432,7 @@ private extension YKNet {
         guard !taskHandlers.keys.contains(task.id) else {
             throw YKNetError(type: .taskExists(task.id))
         }
-        taskHandlers[sessionTask.taskIdentifier] = ArTaskHandler(task: task,
+        taskHandlers[sessionTask.taskIdentifier] = YKNetTaskHandler(task: task,
                                                                  sessionTask: sessionTask,
                                                                  urlStr: urlStr,
                                                                  responseQueue: responseQueue,
@@ -450,12 +450,12 @@ private extension YKNet {
         }
     }
 
-    func worker(of event: YKNetRequestEvent) -> AfterWorker {
-        var work: AfterWorker
+    func worker(of event: YKNetRequestEvent) -> YKNetAfterWorker {
+        var work: YKNetAfterWorker
         if let tWork = self.afterWorkers[event.name] {
             work = tWork
         } else {
-            work = AfterWorker()
+            work = YKNetAfterWorker()
         }
         return work
     }

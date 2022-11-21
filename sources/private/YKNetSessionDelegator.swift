@@ -9,10 +9,10 @@ import Foundation
 
 /// YKNetSessionDelegator is weakly owned by YKNet,which receives message from session tasks.
 @objc class YKNetSessionDelegator: NSObject,
-                                URLSessionTaskDelegate,
-                                URLSessionDataDelegate,
-                                URLSessionDownloadDelegate,
-                                URLSessionStreamDelegate {
+                                   URLSessionTaskDelegate,
+                                   URLSessionDataDelegate,
+                                   URLSessionDownloadDelegate,
+                                   URLSessionStreamDelegate {
     private weak var ykNet: YKNet?
     private weak var fileHandler: ArFileHandler?
     
@@ -30,14 +30,14 @@ import Foundation
                     didCompleteWithError error: Error?) {
         guard let ykNet = ykNet,
               let handler = ykNet.taskHandlers[task.taskIdentifier] else {
-                  return
-              }
+            return
+        }
         
         ykNet.removeTask(taskId: task.taskIdentifier)
         if let requestError = error,
            let fail = handler.requestFail {
             let YKNetError = YKNetError.fail(requestError.localizedDescription,
-                                       code: requestError._code)
+                                             code: requestError._code)
             ykNet.request(error: YKNetError,
                           of: handler.task.event,
                           with: handler.urlStr)
@@ -70,7 +70,7 @@ import Foundation
               let downloadTask = handler.task as? YKNetDownloadTaskProtocol,
               let requestFail = handler.requestFail,
               let `success` = handler.success,
-        let `fileHandler` = fileHandler else {
+              let `fileHandler` = fileHandler else {
             return
         }
         var targetPath: String?
@@ -116,13 +116,12 @@ import Foundation
         }
         progress(Float(totalBytesWritten) / Float(totalBytesExpectedToWrite))
     }
-
     
     func urlSession(_ session: URLSession,
                     downloadTask: URLSessionDownloadTask,
                     didResumeAtOffset fileOffset: Int64,
                     expectedTotalBytes: Int64) {
-        // 断点续传
+        // TODO: 断点续传
         print(#function)
     }
 }

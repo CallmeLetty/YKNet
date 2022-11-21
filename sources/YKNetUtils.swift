@@ -14,7 +14,7 @@ struct OptionsDescription {
     }
 }
 
-class AfterWorker {
+class YKNetAfterWorker {
     private var pendingRequestWorkItem: DispatchWorkItem?
     
     func perform(after: TimeInterval,
